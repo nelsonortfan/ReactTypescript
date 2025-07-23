@@ -34,64 +34,6 @@ const UserFormModal: React.FC<Props> = ({ isOpen, onClose, elementoId}) => {
     }
   }, [isOpen, elementoId]);
 
-  /*
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log(`Nombre: ${name}, Pais: ${country}`);
-        onClose(); // cierra el modal
-    };
-
-    return (
-        <Modal
-            isOpen = {isOpen}
-            onRequest = {onClose}
-            contentLabel = "Formulario del Usuario de Nelson"
-            style = {{
-                content:{
-                    width: '300px',
-                    margin: 'auto',
-                    padding: '20px'
-                },
-            }
-            }
-        >
-            <h2>Vamos a crear un formulario de Usuario</h2>
-            <form  onSubmit={handleSubmit} >        
-                <label>
-                    Nombre: 
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={ (e) => setName(e.target.value) }
-                        required
-                    />
-                </label>
-                <br />
-                <label>
-                    Pais:
-                    <select
-                        value={country}
-                        onChange={ (e) => setCountry(e.target.value) }
-                        required
-                    >
-                        <option value="">Selecciona un Pais</option>
-                        {
-                            countries.map((c) => (
-                                <option key={c} value={c}>{c}</option>
-                            )
-                        )
-                        }
-                    </select>
-                </label>
-                <br/>
-                <button type="submit" >Enviar</button>
-                <button type="button" onClick={onClose}>Cerrar</button>
-            </form>
-        </Modal>
-    );
-
-    */
-
     const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -100,7 +42,7 @@ const UserFormModal: React.FC<Props> = ({ isOpen, onClose, elementoId}) => {
       country,
     };
 
-    fetch(`http://localhost:8080/info/1`, {
+    fetch(`http://localhost:8080/info/${elementoId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

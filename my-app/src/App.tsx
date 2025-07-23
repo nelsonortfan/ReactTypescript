@@ -12,7 +12,7 @@ function App() {
       <h1>Mi primera App usando TypeScript</h1>
       <Greeting name="Nelson" age={37} />
        <button onClick={() => setIsModalOpen(true)}>Abrir formulario</button>
-       <UserFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+       <UserFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} elementoId={1} />
     </div>
   );
 }
