@@ -12,9 +12,9 @@ interface Props{
 
 
 const UserFormModal: React.FC<Props> = ({ isOpen, onClose, elementoId}) => {
-    const [name, setName] = React.useState('');
-    const [country, setCountry] = React.useState('');
-    const [email, setEmail] = React.useState('');
+    const [name, setName] = React.useState('Michi');
+    const [country, setCountry] = React.useState('Chile');
+    const [email, setEmail] = React.useState('lagata123@gmail.com');
     const countries = ['Colombia', 'Peru', 'Mexico', 'Argentina', 'España', 'Chile'];
     const [error, setError] = React.useState<string | null>(null);
 
