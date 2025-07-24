@@ -14,7 +14,9 @@ interface Props{
 const UserFormModal: React.FC<Props> = ({ isOpen, onClose, elementoId}) => {
     const [name, setName] = React.useState('');
     const [country, setCountry] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const countries = ['Colombia', 'Peru', 'Mexico', 'Argentina', 'España', 'Chile'];
+    const [error, setError] = React.useState<string | null>(null);
 
 
     React.useEffect(() => {
@@ -27,9 +29,12 @@ const UserFormModal: React.FC<Props> = ({ isOpen, onClose, elementoId}) => {
         .then((data) => {
           setName(data.name || '');
           setCountry(data.country || '');
+          setEmail(data.email || '');
+          setError(null);
         })
         .catch((err) => {
           console.error('Error al cargar info:', err);
+          setError('No se pudo cargar la información. Verifica tu conexión o intenta más tarde.');
         });
     }
   }, [isOpen, elementoId]);
@@ -55,10 +60,12 @@ const UserFormModal: React.FC<Props> = ({ isOpen, onClose, elementoId}) => {
       })
       .then((data) => {
         console.log('Actualización exitosa:', data);
+        setError(null);
         onClose();
       })
       .catch((err) => {
         console.error('Error al actualizar info:', err);
+        setError('No se pudo actualizar la información. Intenta de nuevo más tarde.');
       });
   };
 
@@ -67,10 +74,22 @@ const UserFormModal: React.FC<Props> = ({ isOpen, onClose, elementoId}) => {
     isOpen={isOpen}
     onRequestClose={onClose}
     contentLabel="Formulario de Usuario"
-    style={{ content: { width: '300px', margin: 'auto', padding: '20px' } }}
+    style={{ content: { width: '300px', margin: 'auto',  height: '350px', maxHeight: '80vh', padding: '20px', overflow: 'auto' } }}
   >
     <h2>Editar Información</h2>
+
+    {error && (
+    <div style={{ color: 'red', marginBottom: '10px' }}>
+      {error}
+    </div>
+    )}
+
+
     <form onSubmit={handleSubmit}>
+      <label>
+        Email: <p>{email}</p>
+      </label>
+      <br/>
       <label>
         Nombre:
         <input
